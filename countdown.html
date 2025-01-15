@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNTIL MY DATE WITH YOUR MOMMY</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ffeedd, #ffccaa);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .countdown {
+            text-align: center;
+            font-size: 3em;
+            color: #333;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        .poop {
+            position: absolute;
+            top: -50px;
+            font-size: 2em;
+            animation: fall infinite linear;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh);
+                opacity: 0.2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown">UNTIL MY DATE WITH YOUR MOMMY: <span id="timer">5:00:00</span></div>
+
+    <script>
+        const countdownEl = document.getElementById('timer');
+        let remainingTime = 5 * 60 * 60; // 5 hours in seconds
+
+        function updateCountdown() {
+            const hours = String(Math.floor(remainingTime / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((remainingTime % 3600) / 60)).padStart(2, '0');
+            const seconds = String(remainingTime % 60).padStart(2, '0');
+
+            countdownEl.textContent = `${hours}:${minutes}:${seconds}`;
+
+            if (remainingTime > 0) {
+                remainingTime--;
+            } else {
+                clearInterval(countdownInterval);
+                countdownEl.textContent = "DATE TIME BABYYYY! 💋";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Poop emoji rain logic
+        function createPoop() {
+            const poop = document.createElement('div');
+            poop.classList.add('poop');
+            poop.textContent = '💩';
+            poop.style.left = Math.random() * 100 + 'vw';
+            poop.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(poop);
+
+            poop.addEventListener('animationend', () => {
+                poop.remove();
+            });
+        }
+
+        setInterval(createPoop, 200);
+    </script>
+</body>
+</html>
