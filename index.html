@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Най-Мощният Контент</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            animation: colorChange 1s infinite;
+            margin-top: 50px;
+        }
+        @keyframes colorChange {
+            0% { color: white; }
+            33% { color: green; }
+            66% { color: red; }
+            100% { color: white; }
+        }
+        .countdown {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall {
+            from {
+                top: -50px;
+                left: calc(100% * var(--x));
+            }
+            to {
+                top: 110vh;
+                left: calc(100% * var(--x));
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Най-Мощният Контент в БЪЛГАРИЯ започва след:</h1>
+    <div class="countdown" id="countdown">69:00</div>
+
+    <script>
+        // Countdown Timer
+        const countdownElement = document.getElementById('countdown');
+        let remainingTime = 69 * 60; // 69 minutes in seconds
+
+        function updateCountdown() {
+            const minutes = Math.floor(remainingTime / 60).toString().padStart(2, '0');
+            const seconds = (remainingTime % 60).toString().padStart(2, '0');
+            countdownElement.textContent = `${minutes}:${seconds}`;
+
+            if (remainingTime > 0) {
+                remainingTime--;
+            } else {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = 'Започваме!';
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Falling Emojis
+        const emojis = ['🇧🇬', '🇧🇬', '🇧🇬'];
+        const body = document.body;
+
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.setProperty('--x', Math.random());
+            emoji.style.left = `calc(100% * ${Math.random()})`;
+            body.appendChild(emoji);
+
+            setTimeout(() => {
+                body.removeChild(emoji);
+            }, 5000);
+        }
+
+        setInterval(createEmoji, 200);
+    </script>
+</body>
+</html>
